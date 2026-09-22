@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Result Management System</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+        }
+
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            text-align: center;
+        }
+
+        form {
+            display: grid;
+            gap: 10px;
+        }
+
+        input, button {
+            padding: 10px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        th {
+            background: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Student Result Management System</h2>
+
+    <form id="resultForm">
+        <input type="text" id="name" placeholder="Student Name" required>
+        <input type="text" id="roll" placeholder="Roll Number" required>
+
+        <input type="number" id="maths" placeholder="Maths" min="0" max="100" required>
+        <input type="number" id="science" placeholder="Science" min="0" max="100" required>
+        <input type="number" id="english" placeholder="English" min="0" max="100" required>
+
+        <button type="submit">Calculate</button>
+        <button type="reset">Clear</button>
+    </form>
+
+    <table id="resultTable">
+        <tr>
+            <th>Name</th>
+            <th>Roll No</th>
+            <th>Total</th>
+            <th>Percentage</th>
+            <th>Grade</th>
+            <th>Result</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+    document.getElementById("resultForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let name = document.getElementById("name").value;
+        let roll = document.getElementById("roll").value;
+
+        let m = Number(document.getElementById("maths").value);
+        let s = Number(document.getElementById("science").value);
+        let en = Number(document.getElementById("english").value);
+
+        if (m < 0 || m > 100 || s < 0 || s > 100 || en < 0 || en > 100) {
+            alert("Enter marks between 0 and 100");
+            return;
+        }
+
+        let total = m + s + en;
+        let percentage = total / 3;
+        let grade;
+
+        if (percentage >= 90)
+            grade = "A+";
+        else if (percentage >= 80)
+            grade = "A";
+        else if (percentage >= 70)
+            grade = "B";
+        else if (percentage >= 60)
+            grade = "C";
+        else if (percentage >= 50)
+            grade = "D";
+        else
+            grade = "F";
+
+        let result = (m >= 35 && s >= 35 && en >= 35)
+                     ? "Pass" : "Fail";
+
+        let row = document.getElementById("resultTable").insertRow();
+
+        row.innerHTML =
+            "<td>" + name + "</td>" +
+            "<td>" + roll + "</td>" +
+            "<td>" + total + "</td>" +
+            "<td>" + percentage.toFixed(2) + "%</td>" +
+            "<td>" + grade + "</td>" +
+            "<td>" + result + "</td>";
+
+        document.getElementById("resultForm").reset();
+    });
+</script>
+
+</body>
+</html>

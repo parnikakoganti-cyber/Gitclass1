@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h2>NET BANKING LOGIN</h2>
+        <input type="text" id="username" placeholder="Enter Username">
+        <br><br>
+
+        <input type="password" id="password" placeholder="Enter Password">  
+        <br><br>
+
+        <button onclick="login()">Login</button>
+        <button onclick="showData()">Show Storage Data</button>
+        <button onclick="logout()">Clear Storage Data</button>
+
+        <p id="message"></p>    
+
+        <script>
+            function login() {
+                let username = document.getElementById("username").value;
+                let password = document.getElementById("password").value;
+
+                if (username ==="Parnika" && password ===="1234") {
+                    localStorage.setItem("username", username);
+                    localStorage.setItem("password", password);
+                    document.getElementById("message").innerHTML = "Login Successful!";
+                } else {
+                    document.getElementById("message").innerHTML = "Please enter both username and password.";
+                }
+            }
+
+            function showData() {
+                var storedUsername = localStorage.getItem("username");
+                var storedPassword = localStorage.getItem("password");
+
+                if (storedUsername && storedPassword) {
+                    document.getElementById("message").innerHTML = "Stored Username: " + storedUsername + "<br>Stored Password: " + storedPassword;
+                } else {
+                    document.getElementById("message").innerHTML = "No data found in storage.";
+                }
+            }
+
+            function logout() {
+                let username
+            }   
+
+    </body>
+</html>
